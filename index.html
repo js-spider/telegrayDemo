@@ -11,7 +11,8 @@
             font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--tg-theme-text-color);
-            margin: 48px 24px;
+            /*margin: 48px 24px;*/
+            margin: 0;
             padding: 0;
             color-scheme: var(--tg-color-scheme);
         }
@@ -59,6 +60,11 @@
         #viewport-params-expand {
             top: 30px;
         }
+        .iframe-class{
+            width: 100vw;
+            height: 100vh;
+            border: none;
+        }
     </style>
 </head>
 
@@ -88,12 +94,13 @@
         <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
         <button onclick="toggleMainButton();">Toggle Main Button</button>
     </main>-->
-    <iframe src="https://www.toobit.com/"></iframe>
+    <iframe src="https://js-spider.github.io/CUSCPS/" class="iframe-class"></iframe>
     <div id="viewport"></div>
     <div id="viewport-params-size"></div>
     <div id="viewport-params-expand"></div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script>
+
         // Init TWA
         Telegram.WebApp.ready();
 

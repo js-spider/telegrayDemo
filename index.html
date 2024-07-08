@@ -170,12 +170,11 @@
         WebApp.onEvent('themeChanged', function() {
             document.body.setAttribute('style', '--bg-color:' + WebApp.backgroundColor);
         });
+        WebApp.postEvent()
 
         WebApp.enableClosingConfirmation()
 
         WebApp.expand()
-
-        WebApp.postEvent()
 
     </script>
 

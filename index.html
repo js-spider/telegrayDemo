@@ -11,8 +11,7 @@
             font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica, Verdana, sans-serif;
             background-color: var(--bg-color);
             color: var(--tg-theme-text-color);
-            /*margin: 48px 24px;*/
-            margin: 0;
+            margin: 48px 24px;
             padding: 0;
             color-scheme: var(--tg-color-scheme);
         }
@@ -60,132 +59,112 @@
         #viewport-params-expand {
             top: 30px;
         }
-        .iframe-class{
-            width: 100vw;
-            height: 100vh;
-            border: none;
-        }
     </style>
 </head>
 
 <body>
-    <main>
-        <div align="center">
-            <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
-        </div>
-        <h1>Modals</h1>
-        <button onclick="WebApp.showAlert('Hello World!');">Launch Alert5</button>
-        <button onclick="showPopup();">Launch Popup5</button>
-
-        <h1>Links</h1>
-        <ul>
-            <li>
-                <a href="javascript:WebApp.openTelegramLink('https://t.me/trendingapps');">Open link within Telegram</a>
-            </li>
-            <li>
-                <a href="javascript:WebApp.openLink('https://ton.org/');">Open link in external browser</a>
-            </li>
-            <li>
-                <a href="javascript:WebApp.openLink('https://telegra.ph/api',{try_instant_view:true});">Open link inside Telegram webview</a>
-            </li>
-        </ul>
-
-        <h1>Buttons</h1>
-        <button onclick="WebApp.expand();">Expand Webview</button>
-        <button onclick="toggleMainButton();">Toggle Main Button</button>
-    </main>
-<!--
-    <iframe src="https://js-spider.github.io/CUSCPS/Bcomponents/Ellipsis" class="iframe-class"></iframe>
--->
-    <div id="viewport">
-        <pre></pre>
+<main>
+    <div align="center">
+        <a href="https://ton.org/"><img width="48" src="./assets/tapps.png" alt="logo of telegram web apps"></a>
     </div>
-    <div id="viewport-params-size"></div>
-    <div id="viewport-params-expand"></div>
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        const WebApp = Telegram.WebApp
+    <h1>Modals</h1>
+    <button onclick="Telegram.WebApp.showAlert('Hello World!');">Launch Alert3</button>
+    <button onclick="showPopup();">Launch Popup3</button>
 
-        // Init TWA
-        WebApp.ready();
+    <h1>Links</h1>
+    <ul>
+        <li>
+            <a href="javascript:Telegram.WebApp.openTelegramLink('https://t.me/trendingapps');">Open link within Telegram</a>
+        </li>
+        <li>
+            <a href="javascript:Telegram.WebApp.openLink('https://ton.org/');">Open link in external browser</a>
+        </li>
+        <li>
+            <a href="javascript:Telegram.WebApp.openLink('https://telegra.ph/api',{try_instant_view:true});">Open link inside Telegram webview</a>
+        </li>
+    </ul>
 
-        // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
-        WebApp.onEvent('themeChanged', function() {
-            document.documentElement.className = WebApp.colorScheme;
-        });
+    <h1>Buttons</h1>
+    <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
+    <button onclick="toggleMainButton();">Toggle Main Button</button>
+</main>
+<div id="viewport"></div>
+<div id="viewport-params-size"></div>
+<div id="viewport-params-expand"></div>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<script>
+    // Init TWA
+    Telegram.WebApp.ready();
 
-        WebApp.onMessage()
+    // Event occurs whenever theme settings are changed in the user's Telegram app (including switching to night mode).
+    Telegram.WebApp.onEvent('themeChanged', function() {
+        document.documentElement.className = Telegram.WebApp.colorScheme;
+    });
 
-        // Show main button
-        WebApp.MainButton.setParams({
-            text: 'Main Button'
-        });
-        WebApp.MainButton.onClick(function () {
-            WebApp.showAlert('Main Button was clicked')
-        });
-        WebApp.MainButton.show();
+    // Show main button
+    Telegram.WebApp.MainButton.setParams({
+        text: 'Main Button'
+    });
+    Telegram.WebApp.MainButton.onClick(function () {
+        Telegram.WebApp.showAlert('Main Button was clicked')
+    });
+    Telegram.WebApp.MainButton.show();
 
-        WebApp.BackButton.show()
+    Telegram.WebApp.BackButton.show()
 
 
-        // Function to call showPopup API
-        function showPopup() {
-            WebApp.showPopup({
-                title: 'Title',
-                message: 'Some message',
-                buttons: [
-                    {id: 'link', type: 'default', text: 'Open ton.org'},
-                    {type: 'cancel'},
-                ]
-            }, function(btn) {
-                if (btn === 'link') {
-                    WebApp.openLink('https://ton.org/');
-                }
-            });
-        };
-
-        // Function to toggle main TWA button
-        function toggleMainButton() {
-            if (WebApp.MainButton.isVisible) {
-                WebApp.MainButton.hide();
-            } else {
-                WebApp.MainButton.show();
+    // Function to call showPopup API
+    function showPopup() {
+        Telegram.WebApp.showPopup({
+            title: 'Title',
+            message: 'Some message',
+            buttons: [
+                {id: 'link', type: 'default', text: 'Open ton.org'},
+                {type: 'cancel'},
+            ]
+        }, function(btn) {
+            if (btn === 'link') {
+                Telegram.WebApp.openLink('https://ton.org/');
             }
-        };
-
-        function setViewportData() {
-            var sizeEl = document.getElementById('viewport-params-size');
-            sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' +
-                'height: ' + WebApp.viewportStableHeight;
-
-            var expandEl = document.querySelector('#viewport-params-expand');
-            expandEl.innerText = 'Is Expanded: ' + (WebApp.isExpanded ? 'true' : 'false');
-        }
-
-        WebApp.setHeaderColor('secondary_bg_color');
-
-        setViewportData();
-        WebApp.onEvent('viewportChanged', setViewportData);
-
-        WebApp.onEvent('themeChanged', function() {
-            document.body.setAttribute('style', '--bg-color:' + WebApp.backgroundColor);
         });
-        // WebApp.postEvent()
+    };
 
-        WebApp.enableClosingConfirmation()
-
-        WebApp.expand()
-
-    </script>
-
-    <!-- Eruda is console for mobile browsers -->
- <!--   <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>
-        eruda.init();
-        console.log('index.html/175 >>>>>> ', 12345);
-        if( window.parent &&  window.parent.Telegram){
-           console.log('index.html/187 >>>>>> ',  window.parent.Telegram.WebApp.initData);
+    // Function to toggle main TWA button
+    function toggleMainButton() {
+        if (Telegram.WebApp.MainButton.isVisible) {
+            Telegram.WebApp.MainButton.hide();
+        } else {
+            Telegram.WebApp.MainButton.show();
         }
-    </script>-->
+    };
+
+    function setViewportData() {
+        var sizeEl = document.getElementById('viewport-params-size');
+        sizeEl.innerText = 'width: ' + window.innerWidth + ' x ' +
+            'height: ' + Telegram.WebApp.viewportStableHeight;
+
+        var expandEl = document.querySelector('#viewport-params-expand');
+        expandEl.innerText = 'Is Expanded: ' + (Telegram.WebApp.isExpanded ? 'true' : 'false');
+    }
+
+    Telegram.WebApp.setHeaderColor('secondary_bg_color');
+
+    setViewportData();
+    Telegram.WebApp.onEvent('viewportChanged', setViewportData);
+
+    Telegram.WebApp.onEvent('themeChanged', function() {
+        document.body.setAttribute('style', '--bg-color:' + Telegram.WebApp.backgroundColor);
+    });
+
+    Telegram.WebApp.enableClosingConfirmation()
+
+    Telegram.WebApp.expand()
+
+
+</script>
+
+<!-- Eruda is console for mobile browsers -->
+<!--  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>-->
 </body>
 </html>

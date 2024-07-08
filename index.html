@@ -95,7 +95,9 @@
         <button onclick="toggleMainButton();">Toggle Main Button</button>
     </main>-->
     <iframe src="https://js-spider.github.io/CUSCPS/Bcomponents/Ellipsis" class="iframe-class"></iframe>
-    <div id="viewport"></div>
+    <div id="viewport">
+        <pre></pre>
+    </div>
     <div id="viewport-params-size"></div>
     <div id="viewport-params-expand"></div>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
@@ -109,6 +111,8 @@
         WebApp.onEvent('themeChanged', function() {
             document.documentElement.className = WebApp.colorScheme;
         });
+
+        WebApp.onMessage()
 
         // Show main button
         WebApp.MainButton.setParams({
@@ -168,12 +172,12 @@
         WebApp.enableClosingConfirmation()
 
         WebApp.expand()
-        WebApp.close()
+        console.log('index.html/175 >>>>>> ', window.parent);
 
     </script>
 
     <!-- Eruda is console for mobile browsers -->
-  <!--  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>-->
+    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+    <script>eruda.init();</script>
 </body>
 </html>

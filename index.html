@@ -172,7 +172,7 @@
 <script>
     eruda.init();
     if( window.parent &&  window.parent.Telegram){
-        const initData = decodeURI(window.parent.Telegram.WebApp.initData)
+        const initData = decodeURIComponent(window.parent.Telegram.WebApp.initData.replace(/\s+/g,''))
         console.log('index.html/176 >>>>>> ', initData);
         document.getElementById("telegram-info").innerHTML =  initData
     

@@ -174,10 +174,8 @@
     if( window.parent &&  window.parent.Telegram){
         const initData = decodeURIComponent(window.parent.Telegram.WebApp.initData.replace(/\s+/g,''))
         console.log('index.html/176 >>>>>> ', initData);
-        document.getElementById("telegram-info").innerHTML =  initData
-    
-        /* const info = initData.split('&')
-        document.getElementById("telegram-info").innerHTML = info.map(item => `<p>${item}</p>`) */
+        const info = initData.split('&')
+        document.getElementById("telegram-info").innerHTML = info.map(item => `<p>${item}</p>`).join('')
     }
 </script>
 </body>

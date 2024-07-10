@@ -172,9 +172,8 @@
 <script>
     eruda.init();
     if( window.parent &&  window.parent.Telegram){
-
-        document.getElementById("telegram-info").innerText = window.parent.Telegram.WebApp.initData
-        console.log('index.html/187 >>>>>> ',  window.parent.Telegram.WebApp.initData);
+        const info = window.parent.Telegram.WebApp.initData.split('&')
+        document.getElementById("telegram-info").innerHTML = info.map(item => `<p>${item}</p>`)
     }
 </script>
 </body>

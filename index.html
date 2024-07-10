@@ -87,6 +87,10 @@
     <h1>Buttons</h1>
     <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
     <button onclick="toggleMainButton();">Toggle Main Button</button>
+
+    <br/>
+      <h4 id="telegram-info"></h4>
+    <br/>
 </main>
 <div id="viewport"></div>
 <div id="viewport-params-size"></div>
@@ -159,12 +163,16 @@
     Telegram.WebApp.enableClosingConfirmation()
 
     Telegram.WebApp.expand()
-
-
+    
 </script>
 
 <!-- Eruda is console for mobile browsers -->
-<!--  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>-->
+<script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+    eruda.init();
+    if( window.parent &&  window.parent.Telegram){
+        console.log('index.html/187 >>>>>> ',  window.parent.Telegram.WebApp.initData);
+    }
+</script>
 </body>
 </html>
